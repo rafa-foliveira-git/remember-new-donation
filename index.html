@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Adicionar Evento ao Google Agenda</title>
+    <script>
+        window.onload = function() {
+            // Calcula a data atual + 90 dias
+            const today = new Date();
+            const startDate = new Date(today);
+            startDate.setDate(today.getDate() + 90);
+            const endDate = new Date(startDate);
+            endDate.setHours(startDate.getHours() + 1); // Duração de 1 hora
+
+            // Formatação para UTC no formato YYYYMMDDTHHMMSSZ
+            const formatDate = (date) => {
+                const pad = (num) => String(num).padStart(2, '0');
+                return date.getUTCFullYear() +
+                    pad(date.getUTCMonth() + 1) +
+                    pad(date.getUTCDate()) +
+                    'T' +
+                    pad(date.getUTCHours()) +
+                    pad(date.getUTCMinutes()) +
+                    pad(date.getUTCSeconds()) +
+                    'Z';
+            };
+
+            const startDateFormatted = formatDate(startDate);
+            const endDateFormatted = formatDate(endDate);
+
+            // Parâmetros do evento
+            const eventTitle = "Reunião de Projeto";
+            const eventDetails = "Discutir as entregas da sprint.";
+            const eventLocation = "Sala 1 - Escritório";
+
+            // Monta o link do Google Agenda
+            const calendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE` +
+                                `&text=${encodeURIComponent(eventTitle)}` +
+                                `&dates=${startDateFormatted}/${endDateFormatted}` +
+                                `&details=${encodeURIComponent(eventDetails)}` +
+                                `&location=${encodeURIComponent(eventLocation)}` +
+                                `&ctz=America/Sao_Paulo`;
+
+            // Redireciona para o Google Agenda
+            window.location.href = calendarUrl;
+        };
+    </script>
+</head>
+<body>
+    <p>Redirecionando para o Google Agenda...</p>
+</body>
+</html>
