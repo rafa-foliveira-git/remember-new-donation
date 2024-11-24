@@ -13,25 +13,30 @@
             endDate.setHours(startDate.getHours() + 1); // Duração de 1 hora
 
             // Formatação para UTC no formato YYYYMMDDTHHMMSSZ
-            const formatDate = (date) => {
+            const formatStartDate = (date) => {
                 const pad = (num) => String(num).padStart(2, '0');
                 return date.getUTCFullYear() +
                     pad(date.getUTCMonth() + 1) +
                     pad(date.getUTCDate()) +
-                    'T' +
-                    pad(date.getUTCHours()) +
-                    pad(date.getUTCMinutes()) +
-                    pad(date.getUTCSeconds()) +
-                    'Z';
+                    'T104500Z';
+            };
+            
+            const formatEndDate = (date) => {
+                const pad = (num) => String(num).padStart(2, '0');
+                return date.getUTCFullYear() +
+                    pad(date.getUTCMonth() + 1) +
+                    pad(date.getUTCDate()) +
+                    'T110000Z';
             };
 
-            const startDateFormatted = formatDate(startDate);
-            const endDateFormatted = formatDate(endDate);
+            const startDateFormatted = formatStartDate(startDate);
+            const endDateFormatted = formatEndDate(endDate);
 
             // Parâmetros do evento
             const eventTitle = "Agendar uma nova doaçāo";
             const eventDetails = "A partir de hoje, você já pode fazer uma nova doação de sangue!!%0A%0A" + 
-            "Acesse o site do HEMOSC em: https://www.hemosc.org.br/agende-sua-doacao.html para agendar ainda hoje!";
+            "Acesse o site do HEMOSC em: https://www.hemosc.org.br/agende-sua-doacao.html%0A%0A" + 
+            "para agendar ainda hoje!";
             const eventLocation = "HEMOSC";
 
             // Monta o link do Google Agenda
